@@ -7,11 +7,11 @@ import { Button } from './ui/button';
 export default function UploadForm({
   configExists,
   address,
-  setAddress,
+  checkConfig,
 }: {
   configExists: boolean;
   address: string | null;
-  setAddress: (address: string | null) => void;
+  checkConfig: () => void;
 }) {
   const fileInput = useRef<HTMLInputElement>(null);
   const [isFileSelected, setIsFileSelected] = useState(false);
@@ -59,12 +59,7 @@ export default function UploadForm({
     const result = await response.json();
     console.log(result);
 
-    fetch('/api/checkConfig')
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-        setAddress(result.address);
-      });
+    checkConfig();
   };
 
   const formatAddressToNumber = (address: string | null): string => {

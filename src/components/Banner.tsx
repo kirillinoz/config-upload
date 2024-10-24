@@ -6,14 +6,14 @@ const Banner: React.FC = () => {
   const [configExists, setConfigExists] = useState(false);
   const [address, setAddress] = useState<string | null>(null);
 
-  useEffect(() => {
-    const checkConfig = async () => {
-      const response = await fetch('/api/checkConfig');
-      const result = await response.json();
-      setConfigExists(result.exists);
-      setAddress(result.address);
-    };
+  const checkConfig = async () => {
+    const response = await fetch('/api/checkConfig');
+    const result = await response.json();
+    setConfigExists(result.exists);
+    setAddress(result.address);
+  };
 
+  useEffect(() => {
     checkConfig();
   }, []);
 
@@ -77,7 +77,7 @@ const Banner: React.FC = () => {
           <UploadForm
             configExists={configExists}
             address={address}
-            setAddress={setAddress}
+            checkConfig={checkConfig}
           />
         </div>
       </div>

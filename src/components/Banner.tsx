@@ -1,27 +1,20 @@
-'use client';
-import { useEffect, useState } from 'react';
 import UploadForm from './UploadForm';
 
-const Banner: React.FC = () => {
-  const [configExists, setConfigExists] = useState(false);
-  const [address, setAddress] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+type BannerProps = {
+  configExists: boolean;
+  address: string | null;
+  loading: boolean;
+  checkConfig: () => void;
+};
 
-  const checkConfig = async () => {
-    setLoading(true);
-    const response = await fetch('/api/checkConfig');
-    const result = await response.json();
-    setConfigExists(result.exists);
-    setAddress(result.address);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    checkConfig();
-  }, []);
-
+const Banner: React.FC<BannerProps> = ({
+  configExists,
+  address,
+  loading,
+  checkConfig,
+}) => {
   return (
-    <div className=" relative overflow-hidden">
+    <div className=" relative overflow-hidden rounded-lg">
       {/* Circle element */}
       <div
         className="absolute w-96 h-96 bg-green-300 rounded-full blur-xl opacity-50"
@@ -48,7 +41,9 @@ const Banner: React.FC = () => {
       <div className="relative bg-green-500/10 shadow-lg ring-1 ring-black/5 rounded-lg w-full flex justify-center items-center backdrop-blur-lg box-border px-12 py-12">
         <div className="w-full">
           <div>
-            <h1 className="text-4xl font-bold">Willkommen bei MaxBox</h1>
+            <h1 className="text-4xl font-bold font-paytone">
+              Willkommen bei MaxBox
+            </h1>
           </div>
           {loading ? (
             <div className="mt-6 animate-pulse flex flex-col space-y-4">
@@ -56,7 +51,7 @@ const Banner: React.FC = () => {
               <div className="w-32 h-3 bg-gray-300 rounded"></div>
             </div>
           ) : configExists ? (
-            <p className="mt-6">
+            <p className="mt-6 font-inter">
               Das Hochladen der{' '}
               <a
                 className=" underline"
@@ -68,7 +63,7 @@ const Banner: React.FC = () => {
               war erfolgreich. Viel Spaß mit sicherem Netz!
             </p>
           ) : (
-            <p className="mt-6">
+            <p className="mt-6 font-inter">
               Laden Sie bitte ihre{' '}
               <a
                 className=" underline"

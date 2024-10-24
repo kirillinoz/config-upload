@@ -94,7 +94,7 @@ export default function UploadForm({
           <div className="w-32 h-6 bg-gray-300 rounded"></div>
         </div>
       ) : configExists ? (
-        <div>
+        <div className="font-inter">
           <p>
             Adresse: <span className="font-bold">{address}</span>
           </p>
@@ -105,7 +105,7 @@ export default function UploadForm({
         </div>
       ) : (
         <>
-          <div className="grid items-center gap-1.5">
+          <div className="grid items-center font-inter gap-1.5">
             <Label htmlFor="file">Konfigurationsdatei</Label>
             <Input
               id="file"

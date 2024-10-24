@@ -17,14 +17,7 @@ export async function GET() {
     const address = addressMatch ? addressMatch[1] : null;
 
     return NextResponse.json({ exists: true, address });
-  } catch (error: any) {
-    if (error.code === 'ENOENT') {
-      console.error('File not found:', error);
-      return NextResponse.json({ exists: false, error: 'File not found' });
-    } else if (error.code === 'EACCES') {
-      console.error('Permission denied:', error);
-      return NextResponse.json({ exists: false, error: 'Permission denied' });
-    }
+  } catch (_) {
     return NextResponse.json({ exists: false });
   }
 }

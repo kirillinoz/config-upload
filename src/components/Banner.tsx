@@ -74,7 +74,11 @@ const Banner: React.FC = () => {
           )}
         </div>
         <div className="ml-6 w-full">
-          <UploadForm configExists={configExists} address={address} />
+          <UploadForm
+            configExists={configExists}
+            address={address}
+            setAddress={setAddress}
+          />
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Button } from './ui/button';
@@ -7,9 +7,11 @@ import { Button } from './ui/button';
 export default function UploadForm({
   configExists,
   address,
+  setAddress,
 }: {
   configExists: boolean;
   address: string | null;
+  setAddress: (address: string | null) => void;
 }) {
   const fileInput = useRef<HTMLInputElement>(null);
   const [isFileSelected, setIsFileSelected] = useState(false);
@@ -56,6 +58,13 @@ export default function UploadForm({
     });
     const result = await response.json();
     console.log(result);
+
+    fetch('/api/checkConfig')
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        setAddress(result.address);
+      });
   };
 
   const formatAddressToNumber = (address: string | null): string => {
@@ -73,6 +82,9 @@ export default function UploadForm({
     address = address.replace(/AF|FF::1/g, '');
 
     address = '+' + address.replace(/:/g, '');
+
+    // Remove /64 at the end
+    address = address.replace(/\/64$/, '');
 
     return address;
   };

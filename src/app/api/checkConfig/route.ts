@@ -17,7 +17,8 @@ export async function GET() {
     const address = addressMatch ? addressMatch[1] : null;
 
     return NextResponse.json({ exists: true, address });
-  } catch (_) {
+  } catch (error) {
+    console.error(error);
     return NextResponse.json({ exists: false });
   }
 }

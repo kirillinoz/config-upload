@@ -25,7 +25,8 @@ export async function POST(req: Request) {
     // Ensure the directory exists
     try {
       await fs.access(wireguardDir);
-    } catch (_) {
+    } catch (error) {
+      console.error(error);
       await fs.mkdir(wireguardDir, { recursive: true });
     }
 

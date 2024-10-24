@@ -5,7 +5,7 @@ import UploadForm from './UploadForm';
 const Banner: React.FC = () => {
   const [configExists, setConfigExists] = useState(false);
   const [address, setAddress] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const checkConfig = async () => {
     setLoading(true);

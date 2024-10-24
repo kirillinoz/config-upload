@@ -34,8 +34,6 @@ export async function POST(req: Request) {
       await fs.mkdir(wireguardDir, { recursive: true });
     }
 
-    await fs.writeFile(filePath, buffer);
-
     // Check if the file already exists
     try {
       await fs.access(filePath);

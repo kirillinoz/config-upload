@@ -36,7 +36,21 @@ export async function POST(req: Request) {
 
     await fs.writeFile(filePath, buffer);
 
-    // Run wg-quick down wg0 and wg-quick up wg0
+    // Check if the file already exists
+    try {
+      await fs.access(filePath);
+      return NextResponse.json({
+        status: 'fail',
+        error: 'File already exists. Upload not allowed.',
+      });
+    } catch (error) {
+      console.error(error);
+      // File does not exist, proceed with writing the file
+    }
+
+    await fs.writeFile(filePath, buffer);
+
+    // Run wg-quick up wg0
     try {
       await execPromise('wg-quick up wg0');
     } catch (execError) {

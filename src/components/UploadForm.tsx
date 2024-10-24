@@ -8,10 +8,12 @@ export default function UploadForm({
   configExists,
   address,
   checkConfig,
+  loading,
 }: {
   configExists: boolean;
   address: string | null;
   checkConfig: () => void;
+  loading: boolean;
 }) {
   const fileInput = useRef<HTMLInputElement>(null);
   const [isFileSelected, setIsFileSelected] = useState(false);
@@ -86,7 +88,12 @@ export default function UploadForm({
 
   return (
     <div className="bg-white px-12 py-12 min-w-96 min-h-56 rounded-md mx-auto flex flex-col items-center justify-center w-fit">
-      {configExists ? (
+      {loading ? (
+        <div className="animate-pulse flex flex-col items-center space-y-4">
+          <div className="w-48 h-6 bg-gray-300 rounded"></div>
+          <div className="w-32 h-6 bg-gray-300 rounded"></div>
+        </div>
+      ) : configExists ? (
         <div>
           <p>
             Adresse: <span className="font-bold">{address}</span>

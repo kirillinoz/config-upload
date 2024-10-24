@@ -5,12 +5,15 @@ import UploadForm from './UploadForm';
 const Banner: React.FC = () => {
   const [configExists, setConfigExists] = useState(false);
   const [address, setAddress] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const checkConfig = async () => {
+    setLoading(true);
     const response = await fetch('/api/checkConfig');
     const result = await response.json();
     setConfigExists(result.exists);
     setAddress(result.address);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -47,7 +50,12 @@ const Banner: React.FC = () => {
           <div>
             <h1 className="text-4xl font-bold">Willkommen bei MaxBox</h1>
           </div>
-          {configExists ? (
+          {loading ? (
+            <div className="mt-6 animate-pulse flex flex-col space-y-4">
+              <div className="h-3 bg-gray-300 rounded"></div>
+              <div className="w-32 h-3 bg-gray-300 rounded"></div>
+            </div>
+          ) : configExists ? (
             <p className="mt-6">
               Das Hochladen der{' '}
               <a
@@ -78,6 +86,7 @@ const Banner: React.FC = () => {
             configExists={configExists}
             address={address}
             checkConfig={checkConfig}
+            loading={loading}
           />
         </div>
       </div>

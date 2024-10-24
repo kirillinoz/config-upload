@@ -38,7 +38,6 @@ export async function POST(req: Request) {
 
     // Run wg-quick down wg0 and wg-quick up wg0
     try {
-      await execPromise('wg-quick down wg0');
       await execPromise('wg-quick up wg0');
     } catch (execError) {
       console.error('Error running wg-quick commands:', execError);

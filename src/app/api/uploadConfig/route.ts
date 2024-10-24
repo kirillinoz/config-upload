@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import fs from 'node:fs/promises';
 import path from 'path';
+import { exec } from 'child_process';
+import util from 'util';
+
+const execPromise = util.promisify(exec);
 
 export async function POST(req: Request) {
   try {
@@ -31,6 +35,19 @@ export async function POST(req: Request) {
     }
 
     await fs.writeFile(filePath, buffer);
+
+    // Run wg-quick down wg0 and wg-quick up wg0
+    try {
+      await execPromise('wg-quick down wg0');
+      await execPromise('wg-quick up wg0');
+    } catch (execError) {
+      console.error('Error running wg-quick commands:', execError);
+      return NextResponse.json({
+        status: 'fail',
+        error: 'Error running wg-quick commands',
+      });
+    }
+
     revalidatePath('/');
     return NextResponse.json({ status: 'success' });
   } catch (e: unknown) {

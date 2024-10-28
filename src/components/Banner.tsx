@@ -52,24 +52,13 @@ const Banner: React.FC<BannerProps> = ({
             </div>
           ) : configExists ? (
             <p className="mt-6 font-inter">
-              Das Hochladen der{' '}
-              <a
-                className=" underline"
-                href="https://innoroute.com/save/"
-                target="_blank"
-              >
-                Deutschland-VPN Konfiguration
-              </a>{' '}
-              war erfolgreich. Viel Spaß mit sicherem Netz!
+              Das Hochladen der Deutschland-VPN Konfiguration war erfolgreich.
+              Viel Spaß mit sicherem Netz!
             </p>
           ) : (
             <p className="mt-6 font-inter">
               Laden Sie bitte ihre{' '}
-              <a
-                className=" underline"
-                href="https://innoroute.com/save/"
-                target="_blank"
-              >
+              <a className=" underline" href="https://innoroute.com/save/">
                 Deutschland-VPN Konfiguration
               </a>{' '}
               hier hoch, um alle Funktionen der MaxBox nutzen zu können

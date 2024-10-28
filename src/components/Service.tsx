@@ -7,7 +7,7 @@ const Service = () => {
   return (
     <Link
       href="/nextcloud"
-      className="aspect-square w-72 relative overflow-hidden border border-gray-900 rounded-lg hover:opacity-70 cursor-pointer transition-opacity inline-block"
+      className="aspect-video w-72 relative overflow-hidden border border-gray-900 rounded-lg hover:opacity-70 cursor-pointer transition-opacity inline-block"
     >
       {/* Circle element */}
       <div
@@ -30,7 +30,7 @@ const Service = () => {
         className="absolute w-56 h-56 bg-gray-300 rounded-full blur-xl opacity-50"
         style={{ top: '80%', left: '50%' }}
       ></div>
-      <div className="relative bg-gray-500/10 shadow-lg ring-1 w-full h-full ring-black/5 rounded-lg flex justify-center items-center backdrop-blur-lg box-border px-12 py-12">
+      <div className="relative bg-gray-500/10 shadow-lg ring-1 w-full h-full ring-black/5 rounded-lg flex justify-center items-center backdrop-blur-lg box-border px-16 py-16">
         <Image src={nextcloud_logo} alt="Logo" width={250} height={250} />
       </div>
     </Link>

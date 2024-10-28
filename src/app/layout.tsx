@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
-import { Inter, Paytone_One } from 'next/font/google';
+import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const paytoneOne = Paytone_One({
+const paytoneOne = Inter({
   subsets: ['latin'],
   variable: '--font-paytone-one',
   weight: '400',
